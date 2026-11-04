@@ -1,5 +1,5 @@
 export const VORTEX_CONFIG = {
-    API_KEY: "TU_API_KEY_AQUI", // Cambia esto en producción y restringe HTTP Referrers
+    API_KEY: "AQ.Ab8RN6IDBp57GYCtHOVSU2f2BoP4Yyvku-LZR7_MwYqMXdtQsg", // Cambia esto en producción y restringe HTTP Referrers
     MODEL: "gemini-1.5-pro",
     PRICING: {
         types: {
