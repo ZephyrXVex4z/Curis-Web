@@ -3,114 +3,579 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CURRIS.SITE | Desarrollo Web Profesional</title>
+    <title>CURRIS - Desarrollo Web Profesional</title>
+    <meta name="description" content="Desarrollamos experiencias digitales, sitios web y soluciones personalizadas para convertir ideas en proyectos reales.">
+    
+    <!-- Favicon SVG Integrado -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f172a' stroke='%234f46e5' stroke-width='4'/%3E%3Ctext x='50' y='68' font-family='sans-serif' font-size='60' font-weight='900' fill='%23ffffff' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+    
+    <!-- Fuentes y Tailwind -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="assets/css/main.css">
+    
+    <!-- Iconos (Phosphor Icons) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
                     colors: {
-                        dark: '#0a0f1a',
-                        darker: '#05080f',
-                        accent: '#f59e0b',
-                        vortex: '#8A2BE2',
-                        vortexLight: '#00FFFF'
-                    },
-                    animation: {
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                    },
-                    keyframes: {
-                        glow: {
-                            '0%': { boxShadow: '0 0 5px rgba(138, 43, 226, 0.2)' },
-                            '100%': { boxShadow: '0 0 20px rgba(0, 255, 255, 0.6)' }
+                        brand: {
+                            50: '#eef2ff',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            900: '#312e81',
                         }
                     }
                 }
             }
         }
     </script>
-</head>
-<body class="bg-darker text-gray-200 font-sans antialiased">
+    <style>
+        body {
+            background-color: #0f172a; /* slate-900 */
+            color: #f8fafc; /* slate-50 */
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-40 bg-darker/90 backdrop-blur-md border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="text-2xl font-bold tracking-tighter flex items-end">
-                CURRIS<span class="text-sm mb-1 ml-0.5 text-accent">.SITE</span>
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #818cf8, #c084fc);
+        }
+        
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navegación -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-black tracking-tight text-white flex items-start">
+                        CURRIS<sup class="text-[0.45em] mt-2 ml-0.5 text-brand-400 font-bold tracking-widest uppercase">.SITE</sup>
+                    </a>
+                </div>
+                <!-- Menú Desktop -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#servicios" class="hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Servicios</a>
+                        <a href="#alojamiento" class="hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Alojamiento</a>
+                        <a href="#pagos" class="hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Métodos de Pago</a>
+                        <a href="#contacto" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg shadow-brand-500/30">
+                            Contacto
+                        </a>
+                    </div>
+                </div>
+                <!-- Menú Móvil Botón -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none">
+                        <i class="ph ph-list text-3xl"></i>
+                    </button>
+                </div>
             </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#servicios" class="hover:text-accent transition">Servicios</a>
-                <a href="#portafolio" class="hover:text-accent transition">Portafolio</a>
-                <a href="#contacto" class="hover:text-accent transition">Contacto</a>
+        </div>
+        <!-- Menú Móvil Desplegable -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-b border-slate-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#servicios" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-700">Servicios</a>
+                <a href="#alojamiento" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-700">Alojamiento</a>
+                <a href="#pagos" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-700">Métodos de Pago</a>
+                <a href="#contacto" class="block px-3 py-2 rounded-md text-base font-medium text-brand-400 hover:bg-slate-700">Contacto</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <section class="pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 text-center">
-        <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">Tu presencia digital <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-yellow-300">comienza aquí</span></h1>
-        <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">Desarrollo web moderno, rápido y profesional. Sin complicaciones.</p>
-        <button class="bg-accent text-darker font-bold py-3 px-8 rounded-full hover:bg-yellow-400 transition shadow-lg shadow-accent/20">Solicitar Presupuesto</button>
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center justify-center min-h-[90vh]">
+        <!-- Decoración de fondo -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-600/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-6 leading-tight">
+                Tu presencia digital <br class="hidden md:block" /> 
+                <span class="gradient-text">comienza aquí.</span>
+            </h1>
+            <p class="mt-4 text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-10 font-light leading-relaxed">
+                Desarrollamos experiencias digitales, sitios web y soluciones personalizadas para convertir ideas en proyectos reales.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#servicios" class="px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white rounded-full font-semibold text-lg transition-all shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:-translate-y-1">
+                    Explorar servicios
+                </a>
+                <a href="#contacto" class="px-8 py-4 bg-slate-800 border border-slate-700 hover:border-slate-600 hover:bg-slate-700 text-white rounded-full font-semibold text-lg transition-all hover:-translate-y-1">
+                    Solicitar presupuesto
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Presentación -->
+    <section id="nosotros" class="py-20 bg-slate-900/50 border-y border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-sm font-bold text-brand-400 tracking-widest uppercase mb-4">Sobre Nosotros</h2>
+            <p class="text-2xl md:text-3xl text-slate-200 font-light leading-relaxed">
+                En <strong class="font-bold text-white">CURRIS<sup class="text-sm ml-0.5">.SITE</sup></strong> nos dedicamos a construir soluciones digitales eficientes y modernas. Nuestra filosofía se basa en la claridad, la funcionalidad y un diseño impecable, entregando herramientas que impulsan proyectos e identidades en internet con total profesionalismo.
+            </p>
+        </div>
     </section>
 
-    <!-- VorteX FAB -->
-    <button id="vortex-fab" class="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-dark border border-white/10 shadow-2xl flex items-center justify-center animate-glow group transition-transform hover:scale-110" aria-label="Habla con VorteX">
-        <img src="assets/images/vortex-logo.svg" alt="VorteX" class="w-10 h-10">
-        <span class="absolute -top-12 right-0 bg-darker border border-white/10 text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap text-vortexLight shadow-lg">
-            Habla con VorteX
-        </span>
-    </button>
+    <!-- Servicios y Precios -->
+    <section id="servicios" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Catálogo de Servicios</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Soluciones escalables adaptadas a tus necesidades. Transparencia desde el primer momento.</p>
+            </div>
 
-    <!-- VorteX Chat Interface -->
-    <div id="vortex-window" class="fixed bottom-28 right-6 z-50 w-[90%] sm:w-[400px] h-[600px] max-h-[80vh] bg-dark border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300 opacity-0 translate-y-10 pointer-events-none">
-        
-        <!-- Header -->
-        <div class="flex items-center justify-between p-4 bg-gradient-to-r from-dark to-darker border-b border-white/5">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-darker flex items-center justify-center border border-white/5 shadow-[0_0_15px_rgba(138,43,226,0.3)]">
-                    <img src="assets/images/vortex-logo.svg" class="w-7 h-7">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Servicio Básico -->
+                <div class="bg-slate-800/50 border border-slate-700 rounded-3xl p-8 hover:border-brand-500/50 transition-all duration-300 hover:-translate-y-2 relative group flex flex-col">
+                    <div class="h-14 w-14 bg-slate-900 rounded-2xl flex items-center justify-center border border-slate-700 mb-6 group-hover:bg-brand-600 group-hover:border-brand-500 transition-colors">
+                        <i class="ph ph-browser text-2xl text-slate-300 group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Sitios Web Básicos</h3>
+                    <div class="flex items-baseline gap-2 mb-6">
+                        <span class="text-slate-400">Desde</span>
+                        <span class="text-4xl font-black text-white">$5</span>
+                        <span class="text-slate-400">USD</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-6 pb-6 border-b border-slate-700">Ideal para portafolios, páginas personales, presentaciones de negocios y landing pages sencillas.</p>
+                    <ul class="space-y-4 mb-8 flex-grow">
+                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-400 mt-1"></i><span class="text-slate-300 text-sm">Página estática.</span></li>
+                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-400 mt-1"></i><span class="text-slate-300 text-sm">Diseño responsive (móvil y escritorio).</span></li>
+                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-400 mt-1"></i><span class="text-slate-300 text-sm">Información del negocio o proyecto.</span></li>
+                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-400 mt-1"></i><span class="text-slate-300 text-sm">Secciones personalizadas.</span></li>
+                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-400 mt-1"></i><span class="text-slate-300 text-sm">Integración de enlaces externos.</span></li>
+                    </ul>
+                    <a href="#contacto" class="block w-full py-3 px-4 bg-slate-700 hover:bg-slate-600 text-center rounded-xl text-sm font-semibold transition-colors mt-auto">Solicitar Básico</a>
                 </div>
+
+                <!-- Servicio Avanzado -->
+                <div class="bg-gradient-to-b from-brand-900/40 to-slate-800/50 border border-brand-500/30 rounded-3xl p-8 hover:border-brand-500 transition-all duration-300 hover:-translate-y-2 relative group flex flex-col shadow-xl shadow-brand-900/20">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Más Popular</div>
+                    <div class="h-14 w-14 bg-brand-600 rounded-2xl flex items-center justify-center border border-brand-500 mb-6">
+                        <i class="ph ph-code text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Sitios Web Avanzados</h3>
+                    <div class="flex items-baseline gap-2 mb-6">
+                        <span class="text-slate-400">Desde</span>
+                        <span class="text-4xl font-black text-white">$10-15</span>
+                        <span class="text-slate-400">USD</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-6 pb-6 border-b border-slate-700/50">Soluciones interactivas complejas sujetas a evaluación de requerimientos.</p>
+                    <ul class="space-y-4 mb-8 flex-grow">
+                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-400 mt-1"></i><span class="text-slate-300 text-sm">Sistemas de autenticación y perfiles.</span></li>
+                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-400 mt-1"></i><span class="text-slate-300 text-sm">Bases de datos.</span></li>
+                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-400 mt-1"></i><span class="text-slate-300 text-sm">Paneles administrativos.</span></li>
+                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-400 mt-1"></i><span class="text-slate-300 text-sm">Notificaciones y tiempo real.</span></li>
+                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-400 mt-1"></i><span class="text-slate-300 text-sm">Integraciones externas (PayPal, etc).</span></li>
+                    </ul>
+                    <a href="#contacto" class="block w-full py-3 px-4 bg-brand-600 hover:bg-brand-500 text-white text-center rounded-xl text-sm font-semibold transition-colors mt-auto">Solicitar Avanzado</a>
+                </div>
+
+                <!-- Desarrollo Personalizado -->
+                <div class="bg-slate-800/50 border border-slate-700 rounded-3xl p-8 hover:border-brand-500/50 transition-all duration-300 hover:-translate-y-2 relative group flex flex-col">
+                    <div class="h-14 w-14 bg-slate-900 rounded-2xl flex items-center justify-center border border-slate-700 mb-6 group-hover:bg-brand-600 group-hover:border-brand-500 transition-colors">
+                        <i class="ph ph-rocket-launch text-2xl text-slate-300 group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">A Medida</h3>
+                    <div class="flex items-baseline gap-2 mb-6">
+                        <span class="text-4xl font-black text-white">Cotizar</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-6 pb-6 border-b border-slate-700">Para clientes que necesitan soluciones específicas y arquitecturas únicas.</p>
+                    <p class="text-slate-300 text-sm mb-8 flex-grow">
+                        Describe tu idea, los requerimientos técnicos y los objetivos de tu proyecto. Evaluaremos la viabilidad técnica y te presentaremos un plan de desarrollo estructurado a tu medida.
+                    </p>
+                    <a href="#contacto" class="block w-full py-3 px-4 bg-slate-700 hover:bg-slate-600 text-center rounded-xl text-sm font-semibold transition-colors mt-auto">Describir Proyecto</a>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <p class="text-xs text-slate-500">* Los precios indicados son base inicial. El costo final dependerá de las funcionalidades, complejidad y tiempo de desarrollo tras la evaluación del proyecto.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dominios y Alojamiento -->
+    <section id="alojamiento" class="py-24 bg-slate-900/80 border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Dominios y Alojamiento</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Nuestros precios de desarrollo no incluyen la compra de dominios. Elige la modalidad que mejor se adapte a ti.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Modalidad 1 -->
+                <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-slate-700/20 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="p-3 bg-slate-900 rounded-lg text-brand-400"><i class="ph ph-globe-hemisphere-west text-2xl"></i></div>
+                        <h3 class="text-xl font-bold">Dominio Propio</h3>
+                    </div>
+                    <p class="text-slate-300 mb-6 text-sm leading-relaxed">
+                        El cliente adquiere y mantiene su propio dominio y hosting. Nosotros entregamos el código o lo conectamos a su infraestructura compatible.
+                    </p>
+                    <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-700/50 font-mono text-sm text-slate-400 flex items-center justify-center">
+                        www.tu-empresa.com
+                    </div>
+                </div>
+
+                <!-- Modalidad 2 -->
+                <div class="bg-slate-800 rounded-2xl p-8 border border-brand-500/30 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-600/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="p-3 bg-brand-900/50 rounded-lg text-brand-400 border border-brand-700/50"><i class="ph ph-hard-drives text-2xl"></i></div>
+                        <h3 class="text-xl font-bold">Alojamiento Gratuito</h3>
+                    </div>
+                    <p class="text-slate-300 mb-6 text-sm leading-relaxed">
+                        Ofrecemos la posibilidad de alojar proyectos estáticos sencillos dentro de nuestro dominio principal. Sujeto a disponibilidad y condiciones.
+                    </p>
+                    <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-700/50 font-mono text-sm text-brand-300 flex items-center justify-center">
+                        curris.site/Tu-Proyecto/
+                    </div>
+                    <ul class="mt-6 space-y-2 text-xs text-slate-400">
+                        <li>• Pensado para sitios estáticos.</li>
+                        <li>• Funciones dinámicas requieren servicios externos.</li>
+                        <li>• No se garantiza alojamiento ilimitado/permanente.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Métodos de Pago -->
+    <section id="pagos" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Métodos de Pago</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Opciones seguras y flexibles. Los datos de pago exactos se proporcionan de forma privada al confirmar el desarrollo.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <!-- Transferencia -->
+                <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700 flex flex-col items-center text-center hover:bg-slate-800 transition-colors">
+                    <div class="w-16 h-16 bg-slate-700 rounded-full flex items-center justify-center mb-4 text-white">
+                        <i class="ph ph-bank text-3xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">Transferencia Bancaria</h4>
+                    <p class="text-sm text-slate-400">Transferencias SPEI.<br>Recepción en cuenta Banamex.</p>
+                </div>
+                
+                <!-- Crypto -->
+                <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700 flex flex-col items-center text-center hover:bg-slate-800 transition-colors">
+                    <div class="w-16 h-16 bg-slate-700 rounded-full flex items-center justify-center mb-4 text-white">
+                        <i class="ph ph-currency-btc text-3xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">Criptomonedas</h4>
+                    <p class="text-sm text-slate-400">Pagos mediante red blockchain.<br>Sujeto a confirmación de red.</p>
+                </div>
+                
+                <!-- PayPal -->
+                <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700 flex flex-col items-center text-center hover:bg-slate-800 transition-colors">
+                    <div class="w-16 h-16 bg-slate-700 rounded-full flex items-center justify-center mb-4 text-white">
+                        <i class="ph ph-paypal-logo text-3xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">PayPal</h4>
+                    <p class="text-sm text-slate-400">Pagos internacionales seguros.<br>(Disponible próximamente)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solicitud de Presupuesto (Contacto) -->
+    <section id="contacto" class="py-24 bg-slate-900 border-t border-slate-800 relative">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxjaXJjbGUgY3g9IjEiIGN5PSIxIiByPSIxIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIi8+Cjwvc3ZnPg==')] opacity-50"></div>
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Inicia tu Proyecto</h2>
+                <p class="text-slate-400">Completa el formulario para solicitar una cotización. Evaluaremos tus requerimientos y nos pondremos en contacto.</p>
+            </div>
+
+            <div class="bg-slate-800 rounded-3xl p-6 md:p-10 border border-slate-700 shadow-2xl">
+                <form id="presupuesto-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Nombre -->
+                        <div>
+                            <label for="nombre" class="block text-sm font-medium text-slate-300 mb-2">Nombre o Empresa *</label>
+                            <input type="text" id="nombre" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all" placeholder="Ej. Juan Pérez">
+                        </div>
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Correo Electrónico *</label>
+                            <input type="email" id="email" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all" placeholder="tucorreo@ejemplo.com">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Tipo de Web -->
+                        <div>
+                            <label for="tipo_web" class="block text-sm font-medium text-slate-300 mb-2">Tipo de Sitio Web *</label>
+                            <select id="tipo_web" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all appearance-none">
+                                <option value="" disabled selected>Selecciona una opción</option>
+                                <option value="Basico">Sitio Web Básico (Desde $5 USD)</option>
+                                <option value="Avanzado">Sitio Web Avanzado (Desde $10-15 USD)</option>
+                                <option value="Personalizado">Desarrollo Personalizado</option>
+                            </select>
+                        </div>
+                        <!-- Presupuesto -->
+                        <div>
+                            <label for="presupuesto_aprox" class="block text-sm font-medium text-slate-300 mb-2">Presupuesto Aproximado (USD)</label>
+                            <input type="number" id="presupuesto_aprox" min="5" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all" placeholder="Ej. 20">
+                        </div>
+                    </div>
+
+                    <!-- Modalidad -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-3">Modalidad de Alojamiento Preferida *</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <label class="flex items-center p-4 border border-slate-700 rounded-xl cursor-pointer hover:bg-slate-700/50 transition-colors bg-slate-900">
+                                <input type="radio" name="modalidad" value="Propio" required class="w-4 h-4 text-brand-500 bg-slate-900 border-slate-600 focus:ring-brand-500">
+                                <span class="ml-3 text-sm text-slate-300">Dominio y Hosting Propio</span>
+                            </label>
+                            <label class="flex items-center p-4 border border-slate-700 rounded-xl cursor-pointer hover:bg-slate-700/50 transition-colors bg-slate-900">
+                                <input type="radio" name="modalidad" value="CURRIS" required class="w-4 h-4 text-brand-500 bg-slate-900 border-slate-600 focus:ring-brand-500">
+                                <span class="ml-3 text-sm text-slate-300">Alojamiento Gratuito CURRIS</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Descripción -->
+                    <div>
+                        <label for="descripcion" class="block text-sm font-medium text-slate-300 mb-2">Descripción del Proyecto *</label>
+                        <textarea id="descripcion" required rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all" placeholder="Describe brevemente de qué trata tu proyecto..."></textarea>
+                    </div>
+
+                    <!-- Funcionalidades -->
+                    <div>
+                        <label for="funcionalidades" class="block text-sm font-medium text-slate-300 mb-2">Funcionalidades Deseadas</label>
+                        <textarea id="funcionalidades" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all" placeholder="Ej. Galería de imágenes, formulario de contacto, login de usuarios..."></textarea>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" id="submit-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 px-8 rounded-xl transition-all shadow-lg shadow-brand-500/25 flex justify-center items-center gap-2">
+                        <span>Enviar Solicitud</span>
+                        <i class="ph ph-paper-plane-right"></i>
+                    </button>
+                    
+                    <!-- Mensajes de estado -->
+                    <div id="form-status" class="hidden text-center p-4 rounded-xl text-sm font-medium transition-all"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-900 pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Marca -->
                 <div>
-                    <h3 class="font-bold text-gray-100 flex items-center gap-2">
-                        VorteX <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                    </h3>
-                    <p class="text-[10px] text-vortexLight uppercase tracking-wider">Tu asesor inteligente</p>
+                    <a href="#" class="text-2xl font-black tracking-tight text-white flex items-start mb-6">
+                        CURRIS<sup class="text-[0.45em] mt-2 ml-0.5 text-brand-400 font-bold tracking-widest uppercase">.SITE</sup>
+                    </a>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Desarrollamos soluciones digitales personalizadas, convirtiendo ideas en proyectos profesionales y accesibles.
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <i class="ph ph-bank text-xl text-slate-500" title="SPEI / Banamex"></i>
+                        <i class="ph ph-currency-btc text-xl text-slate-500" title="Criptomonedas"></i>
+                        <i class="ph ph-paypal-logo text-xl text-slate-500" title="PayPal"></i>
+                    </div>
+                </div>
+
+                <!-- Servicios -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Servicios</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="#servicios" class="hover:text-brand-400 transition-colors">Sitios Web Básicos</a></li>
+                        <li><a href="#servicios" class="hover:text-brand-400 transition-colors">Sitios Web Avanzados</a></li>
+                        <li><a href="#servicios" class="hover:text-brand-400 transition-colors">Desarrollo Personalizado</a></li>
+                        <li><a href="#contacto" class="hover:text-brand-400 transition-colors">Solicitar Presupuesto</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contacto -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Contacto</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li class="flex items-center gap-2"><i class="ph ph-envelope-simple text-brand-400"></i> <a href="mailto:contacto@curris.site" class="hover:text-white transition-colors">contacto@curris.site</a></li>
+                        <li class="flex items-center gap-2"><i class="ph ph-whatsapp-logo text-brand-400"></i> <a href="#" class="hover:text-white transition-colors">Configurar WhatsApp</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal & Redes -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Información Legal</h4>
+                    <ul class="space-y-3 text-sm text-slate-400 mb-8">
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Términos de Uso</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Política de Privacidad</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Política de Alojamiento</a></li>
+                    </ul>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-brand-500 transition-all"><i class="ph ph-facebook-logo"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-brand-500 transition-all"><i class="ph ph-instagram-logo"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-brand-500 transition-all"><i class="ph ph-tiktok-logo"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-brand-500 transition-all"><i class="ph ph-twitter-logo"></i></a>
+                    </div>
                 </div>
             </div>
-            <div class="flex gap-2">
-                <button id="vortex-clear" class="text-gray-400 hover:text-white p-1" title="Limpiar historial">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                </button>
-                <button id="vortex-close" class="text-gray-400 hover:text-white p-1" title="Cerrar">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
+
+            <div class="pt-8 border-t border-slate-900 text-center flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-500 text-sm">
+                    &copy; <span id="year"></span> CURRIS<sup class="text-[10px]">.SITE</sup>. Todos los derechos reservados.
+                </p>
+                <p class="text-slate-600 text-xs">Desarrollo y diseño independiente.</p>
             </div>
         </div>
+    </footer>
 
-        <!-- Messages -->
-        <div id="vortex-messages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-darker/60 scrollbar-hide">
-            <!-- Dynamic Content -->
-        </div>
+    <!-- Scripts de interactividad -->
+    <script>
+        // Actualizar año copyright
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        <!-- Input -->
-        <div class="p-3 bg-dark border-t border-white/5">
-            <div id="vortex-suggestions" class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-                <!-- Suggestions -->
-            </div>
-            <form id="vortex-form" class="flex gap-2 relative">
-                <textarea id="vortex-input" rows="1" class="w-full bg-darker border border-white/10 rounded-xl py-3 px-4 text-sm text-white focus:outline-none focus:border-vortex/50 resize-none scrollbar-hide max-h-32" placeholder="Escribe tu consulta..."></textarea>
-                <button type="submit" id="vortex-send" class="p-3 rounded-xl bg-vortex/20 text-vortexLight hover:bg-vortex/40 hover:text-white transition flex-shrink-0">
-                    <svg class="w-5 h-5 transform rotate-90" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
-                </button>
-            </form>
-            <div class="text-center mt-2 flex items-center justify-center gap-1">
-                <span class="text-[9px] text-gray-500 uppercase tracking-widest">Powered by Google Gemini</span>
-            </div>
-        </div>
-    </div>
+        // Menú móvil
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
 
-    <!-- Modulos JS como tipo module -->
-    <script type="module" src="js/vortex-main.js"></script>
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Cerrar menú móvil al hacer click en enlace
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+    </script>
+
+    <!-- Firebase Integration -->
+    <script type="module">
+        // Importar funciones modulares de Firebase v11
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Configuración proporcionada
+        const firebaseConfig = {
+            apiKey: "AIzaSyCCMHAsuRTPCHU25np29d4a2Aa9zi91D7g",
+            authDomain: "curis-web.firebaseapp.com",
+            projectId: "curis-web",
+            storageBucket: "curis-web.firebasestorage.app",
+            messagingSenderId: "18990303857",
+            appId: "1:18990303857:web:65933c50b8e42e192329d0",
+            measurementId: "G-7CGQ4XX3VP"
+        };
+
+        // Inicializar
+        let app, auth, db;
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+        } catch(e) {
+            console.error("Error al inicializar Firebase:", e);
+        }
+
+        const form = document.getElementById('presupuesto-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const statusDiv = document.getElementById('form-status');
+
+        if(form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                if(!auth || !db) {
+                    showStatus("Error de conexión. Inténtalo más tarde.", "error");
+                    return;
+                }
+
+                // Cambiar estado botón
+                const originalBtnHTML = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="ph ph-spinner animate-spin"></i> Procesando...';
+                submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+
+                try {
+                    // Requisito estricto: Autenticación antes de escribir
+                    await signInAnonymously(auth);
+
+                    // Recolectar datos
+                    const formData = {
+                        nombre: document.getElementById('nombre').value,
+                        email: document.getElementById('email').value,
+                        tipo_web: document.getElementById('tipo_web').value,
+                        presupuesto_aprox: document.getElementById('presupuesto_aprox').value || null,
+                        modalidad_alojamiento: document.querySelector('input[name="modalidad"]:checked').value,
+                        descripcion: document.getElementById('descripcion').value,
+                        funcionalidades: document.getElementById('funcionalidades').value,
+                        fecha_creacion: serverTimestamp(),
+                        estado: 'pendiente'
+                    };
+
+                    // Guardar en Firestore (Colección segura recomendada)
+                    // Nota: Asegúrate de tener reglas configuradas en Firebase para permitir a usuarios anónimos escribir aquí.
+                    await addDoc(collection(db, "solicitudes_presupuesto"), formData);
+
+                    // Éxito
+                    form.reset();
+                    showStatus("¡Solicitud enviada con éxito! Nos pondremos en contacto pronto.", "success");
+
+                } catch (error) {
+                    console.error("Error enviando solicitud: ", error);
+                    showStatus("Hubo un error al enviar la solicitud. Revisa tu conexión o inténtalo de nuevo.", "error");
+                } finally {
+                    // Restaurar botón
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnHTML;
+                    submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                }
+            });
+        }
+
+        function showStatus(message, type) {
+            statusDiv.textContent = message;
+            statusDiv.classList.remove('hidden', 'bg-green-500/20', 'text-green-400', 'bg-red-500/20', 'text-red-400', 'border-green-500/50', 'border-red-500/50', 'border');
+            
+            if(type === 'success') {
+                statusDiv.classList.add('bg-green-500/20', 'text-green-400', 'border', 'border-green-500/50');
+            } else {
+                statusDiv.classList.add('bg-red-500/20', 'text-red-400', 'border', 'border-red-500/50');
+            }
+            
+            setTimeout(() => {
+                statusDiv.classList.add('hidden');
+            }, 8000);
+        }
+    </script>
 </body>
 </html>
