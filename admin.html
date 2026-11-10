@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin · CURRIS·ˢⁱᵗᵉ</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f172a' stroke='%234f46e5' stroke-width='4'/%3E%3Ctext x='50' y='68' font-family='sans-serif' font-size='60' font-weight='900' fill='%23ffffff' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #818cf8, #c084fc);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen">
+
+    <!-- ============ VISTA: LOGIN ============ -->
+    <section id="view-login" class="min-h-screen flex items-center justify-center px-4">
+        <div class="w-full max-w-md">
+            <div class="text-center mb-8">
+                <a href="index.html" class="inline-flex items-center gap-2 mb-6">
+                    <img src="/assets/images/logo.svg" alt="CURRIS.SITE" class="h-10 w-auto">
+                </a>
+                <h1 class="text-2xl font-bold">Panel <span class="gradient-text">Admin</span></h1>
+                <p class="text-slate-400 text-sm mt-2">Inicia sesión con tu cuenta de administrador.</p>
+            </div>
+
+            <form id="login-form" class="bg-slate-800 border border-slate-700 rounded-3xl p-8 space-y-5 shadow-2xl">
+                <div>
+                    <label for="login-email" class="block text-sm font-medium text-slate-300 mb-2">Correo electrónico</label>
+                    <input type="email" id="login-email" required autocomplete="username" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all" placeholder="admin@curris.site">
+                </div>
+                <div>
+                    <label for="login-password" class="block text-sm font-medium text-slate-300 mb-2">Contraseña</label>
+                    <input type="password" id="login-password" required autocomplete="current-password" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all" placeholder="••••••••">
+                </div>
+                <button type="submit" id="login-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-lg shadow-brand-500/25 flex justify-center items-center gap-2">
+                    <span>Iniciar sesión</span>
+                    <i class="ph ph-sign-in"></i>
+                </button>
+                <div id="login-status" class="hidden text-center p-3 rounded-xl text-sm font-medium bg-red-500/20 text-red-400 border border-red-500/50"></div>
+            </form>
+            <p class="text-center text-xs text-slate-500 mt-6">Las cuentas de administrador se crean únicamente desde Firebase. No hay opción de registro aquí.</p>
+            <a href="index.html" class="block text-center mt-4 text-sm text-slate-400 hover:text-white">&larr; Volver al inicio</a>
+        </div>
+    </section>
+
+    <!-- ============ VISTA: PANEL (requiere sesión) ============ -->
+    <section id="view-panel" class="hidden min-h-screen">
+        <!-- Topbar -->
+        <nav class="w-full border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-40">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2">
+                    <img src="/assets/images/logo.svg" alt="CURRIS.SITE" class="h-9 w-auto">
+                    <span class="text-sm font-bold text-slate-400 hidden sm:inline">/ Admin</span>
+                </a>
+                <div class="flex items-center gap-4">
+                    <span id="user-email" class="text-sm text-slate-400 hidden sm:inline"></span>
+                    <a href="promos.html" target="_blank" class="text-sm text-brand-400 hover:text-brand-300 flex items-center gap-1">
+                        Ver /promos <i class="ph ph-arrow-square-out"></i>
+                    </a>
+                    <button id="logout-btn" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-full text-sm font-medium transition-colors flex items-center gap-2">
+                        <i class="ph ph-sign-out"></i> Salir
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+                <div>
+                    <h1 class="text-3xl font-bold mb-2">Ofertas y <span class="gradient-text">Promos</span></h1>
+                    <p class="text-slate-400 text-sm">Administra las ofertas visibles en la página pública <span class="font-mono text-brand-300">/promos</span>.</p>
+                </div>
+                <button id="new-oferta-btn" class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-sm font-semibold transition-all shadow-lg shadow-brand-500/25 flex items-center gap-2 self-start">
+                    <i class="ph ph-plus"></i> Nueva oferta
+                </button>
+            </div>
+
+            <!-- Formulario crear/editar -->
+            <div id="form-container" class="hidden bg-slate-800 border border-slate-700 rounded-3xl p-6 md:p-8 mb-10 shadow-xl">
+                <h2 id="form-title" class="text-xl font-bold mb-6">Nueva oferta</h2>
+                <form id="oferta-form" class="space-y-5">
+                    <input type="hidden" id="oferta-id">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label for="oferta-titulo" class="block text-sm font-medium text-slate-300 mb-2">Título *</label>
+                            <input type="text" id="oferta-titulo" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Ej. 20% de descuento en sitios básicos">
+                        </div>
+                        <div>
+                            <label for="oferta-etiqueta" class="block text-sm font-medium text-slate-300 mb-2">Etiqueta</label>
+                            <input type="text" id="oferta-etiqueta" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Ej. Promo, Lanzamiento, 2x1">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label for="oferta-precio" class="block text-sm font-medium text-slate-300 mb-2">Precio con oferta</label>
+                            <input type="text" id="oferta-precio" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Ej. $4 USD">
+                        </div>
+                        <div>
+                            <label for="oferta-precio-original" class="block text-sm font-medium text-slate-300 mb-2">Precio original (tachado)</label>
+                            <input type="text" id="oferta-precio-original" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Ej. $5 USD">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="oferta-descripcion" class="block text-sm font-medium text-slate-300 mb-2">Descripción</label>
+                        <textarea id="oferta-descripcion" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Describe brevemente la oferta..."></textarea>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label for="oferta-orden" class="block text-sm font-medium text-slate-300 mb-2">Orden (menor = primero)</label>
+                            <input type="number" id="oferta-orden" value="0" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all">
+                        </div>
+                        <div class="flex items-center gap-3 pt-7">
+                            <input type="checkbox" id="oferta-activa" checked class="w-5 h-5 rounded text-brand-500 bg-slate-900 border-slate-600 focus:ring-brand-500">
+                            <label for="oferta-activa" class="text-sm text-slate-300">Visible en /promos (activa)</label>
+                        </div>
+                    </div>
+                    <div class="flex gap-3 pt-2">
+                        <button type="submit" id="oferta-submit-btn" class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-sm font-semibold transition-all flex items-center gap-2">
+                            <i class="ph ph-check"></i> Guardar oferta
+                        </button>
+                        <button type="button" id="cancel-form-btn" class="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-xl text-sm font-semibold transition-all">
+                            Cancelar
+                        </button>
+                    </div>
+                    <div id="oferta-status" class="hidden text-center p-3 rounded-xl text-sm font-medium"></div>
+                </form>
+            </div>
+
+            <!-- Lista de ofertas -->
+            <div id="ofertas-loading" class="text-center text-slate-400 py-16">
+                <i class="ph ph-spinner animate-spin text-3xl"></i>
+                <p class="mt-3 text-sm">Cargando ofertas...</p>
+            </div>
+            <div id="ofertas-empty" class="hidden text-center py-16 text-slate-400">
+                <i class="ph ph-tag text-4xl text-slate-600"></i>
+                <p class="mt-4">Aún no has creado ninguna oferta.</p>
+            </div>
+            <div id="ofertas-list" class="space-y-4"></div>
+        </main>
+    </section>
+
+    <!-- ============ VISTA: VERIFICANDO SESIÓN ============ -->
+    <section id="view-checking" class="min-h-screen flex items-center justify-center">
+        <i class="ph ph-spinner animate-spin text-4xl text-brand-400"></i>
+    </section>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import {
+            getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import {
+            getFirestore, collection, addDoc, updateDoc, deleteDoc, doc,
+            onSnapshot, orderBy, query, serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { firebaseConfig } from "./js/firebase-config.js";
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Vistas
+        const viewChecking = document.getElementById('view-checking');
+        const viewLogin = document.getElementById('view-login');
+        const viewPanel = document.getElementById('view-panel');
+
+        function showView(view) {
+            viewChecking.classList.add('hidden');
+            viewLogin.classList.add('hidden');
+            viewPanel.classList.add('hidden');
+            view.classList.remove('hidden');
+        }
+
+        // --- LOGIN (solo signInWithEmailAndPassword, nunca registro) ---
+        const loginForm = document.getElementById('login-form');
+        const loginBtn = document.getElementById('login-btn');
+        const loginStatus = document.getElementById('login-status');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+
+            loginBtn.disabled = true;
+            loginStatus.classList.add('hidden');
+            const originalHTML = loginBtn.innerHTML;
+            loginBtn.innerHTML = '<i class="ph ph-spinner animate-spin"></i> Verificando...';
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                // onAuthStateChanged se encarga de mostrar el panel
+            } catch (error) {
+                console.error("Error de login:", error);
+                let msg = "No se pudo iniciar sesión. Verifica tus credenciales.";
+                if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
+                    msg = "Correo o contraseña incorrectos.";
+                } else if (error.code === 'auth/too-many-requests') {
+                    msg = "Demasiados intentos. Intenta más tarde.";
+                } else if (error.code === 'auth/invalid-email') {
+                    msg = "El correo electrónico no es válido.";
+                }
+                loginStatus.textContent = msg;
+                loginStatus.classList.remove('hidden');
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = originalHTML;
+            }
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            signOut(auth);
+        });
+
+        // --- Estado de autenticación: toda cuenta logueada es admin ---
+        let unsubscribeOfertas = null;
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('user-email').textContent = user.email || '';
+                showView(viewPanel);
+                iniciarListadoOfertas();
+            } else {
+                if (unsubscribeOfertas) {
+                    unsubscribeOfertas();
+                    unsubscribeOfertas = null;
+                }
+                showView(viewLogin);
+            }
+        });
+
+        // --- CRUD de ofertas ---
+        const formContainer = document.getElementById('form-container');
+        const formTitle = document.getElementById('form-title');
+        const ofertaForm = document.getElementById('oferta-form');
+        const ofertaIdInput = document.getElementById('oferta-id');
+        const ofertaStatus = document.getElementById('oferta-status');
+        const ofertasList = document.getElementById('ofertas-list');
+        const ofertasLoading = document.getElementById('ofertas-loading');
+        const ofertasEmpty = document.getElementById('ofertas-empty');
+
+        function escapeHTML(str) {
+            const div = document.createElement('div');
+            div.textContent = str ?? '';
+            return div.innerHTML;
+        }
+
+        function resetForm() {
+            ofertaForm.reset();
+            ofertaIdInput.value = '';
+            document.getElementById('oferta-activa').checked = true;
+            document.getElementById('oferta-orden').value = 0;
+            formTitle.textContent = 'Nueva oferta';
+            ofertaStatus.classList.add('hidden');
+        }
+
+        document.getElementById('new-oferta-btn').addEventListener('click', () => {
+            resetForm();
+            formContainer.classList.remove('hidden');
+            formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        document.getElementById('cancel-form-btn').addEventListener('click', () => {
+            formContainer.classList.add('hidden');
+            resetForm();
+        });
+
+        ofertaForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('oferta-submit-btn');
+            submitBtn.disabled = true;
+            const originalHTML = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="ph ph-spinner animate-spin"></i> Guardando...';
+
+            const data = {
+                titulo: document.getElementById('oferta-titulo').value.trim(),
+                etiqueta: document.getElementById('oferta-etiqueta').value.trim(),
+                precio: document.getElementById('oferta-precio').value.trim(),
+                precio_original: document.getElementById('oferta-precio-original').value.trim(),
+                descripcion: document.getElementById('oferta-descripcion').value.trim(),
+                orden: Number(document.getElementById('oferta-orden').value) || 0,
+                activa: document.getElementById('oferta-activa').checked,
+                actualizado: serverTimestamp()
+            };
+
+            try {
+                const id = ofertaIdInput.value;
+                if (id) {
+                    await updateDoc(doc(db, 'ofertas', id), data);
+                } else {
+                    data.creado = serverTimestamp();
+                    await addDoc(collection(db, 'ofertas'), data);
+                }
+                formContainer.classList.add('hidden');
+                resetForm();
+            } catch (error) {
+                console.error("Error guardando oferta:", error);
+                ofertaStatus.textContent = "No se pudo guardar la oferta. Inténtalo de nuevo.";
+                ofertaStatus.classList.remove('hidden', 'bg-green-500/20', 'text-green-400', 'border-green-500/50');
+                ofertaStatus.classList.add('bg-red-500/20', 'text-red-400', 'border', 'border-red-500/50');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalHTML;
+            }
+        });
+
+        function renderOfertaRow(id, data) {
+            const titulo = escapeHTML(data.titulo || '(sin título)');
+            const etiqueta = escapeHTML(data.etiqueta || '');
+            const precio = escapeHTML(data.precio || '');
+            const descripcion = escapeHTML(data.descripcion || '');
+            const activa = !!data.activa;
+
+            const row = document.createElement('div');
+            row.className = 'bg-slate-800/60 border border-slate-700 rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4';
+            row.innerHTML = `
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap mb-1">
+                        <h3 class="font-bold text-white truncate">${titulo}</h3>
+                        ${etiqueta ? `<span class="text-[10px] uppercase tracking-wider bg-brand-600/30 text-brand-300 px-2 py-0.5 rounded-full">${etiqueta}</span>` : ''}
+                        <span class="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full ${activa ? 'bg-green-500/20 text-green-400' : 'bg-slate-700 text-slate-400'}">${activa ? 'Activa' : 'Oculta'}</span>
+                    </div>
+                    ${precio ? `<p class="text-sm text-brand-300 font-semibold mb-1">${precio}</p>` : ''}
+                    ${descripcion ? `<p class="text-sm text-slate-400 truncate">${descripcion}</p>` : ''}
+                </div>
+                <div class="flex gap-2 flex-shrink-0">
+                    <button data-action="edit" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition-colors flex items-center gap-1">
+                        <i class="ph ph-pencil-simple"></i> Editar
+                    </button>
+                    <button data-action="delete" class="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-lg text-sm font-medium transition-colors flex items-center gap-1">
+                        <i class="ph ph-trash"></i> Eliminar
+                    </button>
+                </div>
+            `;
+
+            row.querySelector('[data-action="edit"]').addEventListener('click', () => {
+                ofertaIdInput.value = id;
+                document.getElementById('oferta-titulo').value = data.titulo || '';
+                document.getElementById('oferta-etiqueta').value = data.etiqueta || '';
+                document.getElementById('oferta-precio').value = data.precio || '';
+                document.getElementById('oferta-precio-original').value = data.precio_original || '';
+                document.getElementById('oferta-descripcion').value = data.descripcion || '';
+                document.getElementById('oferta-orden').value = data.orden || 0;
+                document.getElementById('oferta-activa').checked = !!data.activa;
+                formTitle.textContent = 'Editar oferta';
+                formContainer.classList.remove('hidden');
+                formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+
+            row.querySelector('[data-action="delete"]').addEventListener('click', async () => {
+                if (!confirm(`¿Eliminar la oferta "${data.titulo || ''}"? Esta acción no se puede deshacer.`)) return;
+                try {
+                    await deleteDoc(doc(db, 'ofertas', id));
+                } catch (error) {
+                    console.error("Error eliminando oferta:", error);
+                    alert("No se pudo eliminar la oferta.");
+                }
+            });
+
+            return row;
+        }
+
+        function iniciarListadoOfertas() {
+            ofertasLoading.classList.remove('hidden');
+            ofertasEmpty.classList.add('hidden');
+            ofertasList.innerHTML = '';
+
+            const q = query(collection(db, 'ofertas'), orderBy('orden', 'asc'));
+
+            unsubscribeOfertas = onSnapshot(q, (snapshot) => {
+                ofertasLoading.classList.add('hidden');
+                ofertasList.innerHTML = '';
+
+                if (snapshot.empty) {
+                    ofertasEmpty.classList.remove('hidden');
+                    return;
+                }
+                ofertasEmpty.classList.add('hidden');
+
+                snapshot.forEach((docSnap) => {
+                    ofertasList.appendChild(renderOfertaRow(docSnap.id, docSnap.data()));
+                });
+            }, (error) => {
+                console.error("Error escuchando ofertas:", error);
+                ofertasLoading.classList.add('hidden');
+                ofertasList.innerHTML = '<p class="text-center text-red-400 text-sm py-8">No se pudieron cargar las ofertas.</p>';
+            });
+        }
+    </script>
+</body>
+</html>

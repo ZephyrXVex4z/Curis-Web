@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofertas y Promos · CURRIS·ˢⁱᵗᵉ</title>
+    <meta name="description" content="Ofertas y promociones activas de CURRIS.SITE.">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f172a' stroke='%234f46e5' stroke-width='4'/%3E%3Ctext x='50' y='68' font-family='sans-serif' font-size='60' font-weight='900' fill='%23ffffff' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #818cf8, #c084fc);
+        }
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navegación -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="flex items-center gap-2">
+                        <img src="/assets/images/logo.svg" alt="CURRIS.SITE Logo" class="h-10 w-auto object-contain">
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html#servicios" class="hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Servicios</a>
+                        <a href="index.html#contacto" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg shadow-brand-500/30">
+                            Contacto
+                        </a>
+                    </div>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <a href="index.html" class="text-slate-300 hover:text-white text-sm font-medium">Volver al inicio</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Encabezado -->
+    <header class="relative pt-32 pb-16 overflow-hidden flex items-center justify-center">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-600/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-4">
+                Ofertas y <span class="gradient-text">Promos</span>
+            </h1>
+            <p class="text-slate-300 max-w-2xl mx-auto">
+                Aprovecha las promociones activas de CURRIS<sup class="text-xs">.SITE</sup>.
+            </p>
+        </div>
+    </header>
+
+    <!-- Contenido -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+
+        <div id="promos-loading" class="text-center text-slate-400 py-10">
+            <i class="ph ph-spinner animate-spin text-3xl"></i>
+            <p class="mt-3 text-sm">Cargando ofertas...</p>
+        </div>
+
+        <div id="promos-empty" class="hidden text-center py-20">
+            <i class="ph ph-tag text-5xl text-slate-600"></i>
+            <p class="mt-4 text-slate-400">Por el momento no hay ofertas activas. ¡Vuelve pronto!</p>
+            <a href="index.html#contacto" class="inline-block mt-6 px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-full text-sm font-semibold transition-all">Solicitar presupuesto</a>
+        </div>
+
+        <div id="promos-error" class="hidden text-center py-20">
+            <i class="ph ph-warning-circle text-5xl text-red-400"></i>
+            <p class="mt-4 text-slate-400">No se pudieron cargar las ofertas en este momento. Intenta de nuevo más tarde.</p>
+        </div>
+
+        <div id="promos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-900 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-slate-500 text-sm">
+                &copy; <span id="year"></span> CURRIS<sup class="text-[10px]">.SITE</sup>. Todos los derechos reservados.
+            </p>
+            <a href="index.html" class="inline-block mt-4 text-brand-400 hover:text-brand-300 text-sm">&larr; Volver al inicio</a>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <!-- Carga de ofertas desde Firestore -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, collection, query, where, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { firebaseConfig } from "./js/firebase-config.js";
+
+        const loadingEl = document.getElementById('promos-loading');
+        const emptyEl = document.getElementById('promos-empty');
+        const errorEl = document.getElementById('promos-error');
+        const gridEl = document.getElementById('promos-grid');
+
+        function escapeHTML(str) {
+            const div = document.createElement('div');
+            div.textContent = str ?? '';
+            return div.innerHTML;
+        }
+
+        function renderOferta(data) {
+            const titulo = escapeHTML(data.titulo || 'Oferta especial');
+            const descripcion = escapeHTML(data.descripcion || '');
+            const precio = data.precio ? escapeHTML(String(data.precio)) : '';
+            const precioOriginal = data.precio_original ? escapeHTML(String(data.precio_original)) : '';
+            const etiqueta = data.etiqueta ? escapeHTML(data.etiqueta) : 'Promo';
+
+            return `
+                <div class="bg-slate-800/50 border border-brand-500/30 rounded-3xl p-8 hover:border-brand-500 transition-all duration-300 hover:-translate-y-2 relative flex flex-col shadow-xl shadow-brand-900/10">
+                    <div class="absolute -top-3 left-8 bg-brand-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">${etiqueta}</div>
+                    <h3 class="text-xl font-bold mb-3 mt-3">${titulo}</h3>
+                    ${precio ? `
+                    <div class="flex items-baseline gap-2 mb-4">
+                        ${precioOriginal ? `<span class="text-slate-500 line-through text-sm">${precioOriginal}</span>` : ''}
+                        <span class="text-3xl font-black text-white">${precio}</span>
+                    </div>` : ''}
+                    <p class="text-slate-400 text-sm mb-8 flex-grow leading-relaxed">${descripcion}</p>
+                    <a href="index.html#contacto" class="block w-full py-3 px-4 bg-brand-600 hover:bg-brand-500 text-white text-center rounded-xl text-sm font-semibold transition-colors mt-auto">Aprovechar oferta</a>
+                </div>
+            `;
+        }
+
+        async function cargarOfertas() {
+            try {
+                const app = initializeApp(firebaseConfig);
+                const db = getFirestore(app);
+
+                const ofertasRef = collection(db, "ofertas");
+                let snapshot;
+                try {
+                    const q = query(ofertasRef, where("activa", "==", true), orderBy("orden", "asc"));
+                    snapshot = await getDocs(q);
+                } catch (e) {
+                    // Fallback por si no existe el índice compuesto o el campo 'orden'
+                    const q2 = query(ofertasRef, where("activa", "==", true));
+                    snapshot = await getDocs(q2);
+                }
+
+                loadingEl.classList.add('hidden');
+
+                if (snapshot.empty) {
+                    emptyEl.classList.remove('hidden');
+                    return;
+                }
+
+                const items = [];
+                snapshot.forEach(doc => items.push(doc.data()));
+
+                gridEl.innerHTML = items.map(renderOferta).join('');
+            } catch (error) {
+                console.error("Error cargando ofertas:", error);
+                loadingEl.classList.add('hidden');
+                errorEl.classList.remove('hidden');
+            }
+        }
+
+        cargarOfertas();
+    </script>
+</body>
+</html>
