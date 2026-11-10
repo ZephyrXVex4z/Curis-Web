@@ -6,19 +6,21 @@
     <title>Información Legal · CURRIS·ˢⁱᵗᵉ</title>
     <meta name="description" content="Términos de Uso, Política de Privacidad y Política de Alojamiento de CURRIS.SITE.">
 
+    <!-- Favicon SVG Integrado -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f172a' stroke='%234f46e5' stroke-width='4'/%3E%3Ctext x='50' y='68' font-family='sans-serif' font-size='60' font-weight='900' fill='%23ffffff' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
 
+    <!-- Fuentes y Tailwind -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Iconos (Phosphor Icons) -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
                         brand: {
                             50: '#eef2ff',
@@ -33,14 +35,13 @@
         }
     </script>
     <style>
-        body {
-            background-color: #0f172a;
-            color: #f8fafc;
-        }
+        body { background-color: #0f172a; color: #f8fafc; }
+
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
         .gradient-text {
             background-clip: text;
             -webkit-background-clip: text;
@@ -52,11 +53,38 @@
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .legal-content h3 { margin-top: 1.5rem; }
-        .legal-content p, .legal-content li { color: #cbd5e1; }
+
+        /* Anclas: dejan espacio para la barra fija */
+        section[id] { scroll-margin-top: 6rem; }
+
+        /* Estilos del texto legal (edita el contenido, no esto) */
+        .legal h3 { font-size: 1.125rem; font-weight: 700; color: #fff; margin: 2rem 0 .75rem; }
+        .legal p  { color: #cbd5e1; font-size: .95rem; line-height: 1.75; margin-bottom: 1rem; }
+        .legal ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem; color: #cbd5e1; font-size: .95rem; line-height: 1.75; }
+        .legal li { margin-bottom: .35rem; }
+        .legal a  { color: #818cf8; text-decoration: underline; text-underline-offset: 3px; }
+        .legal a:hover { color: #fff; }
+
+        /* Marca los datos que debes cambiar: [ASÍ] */
+        .editar {
+            background: rgba(250, 204, 21, 0.12);
+            color: #fde047;
+            border-radius: 4px;
+            padding: 0 4px;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- ============================================================ -->
+    <!-- CÓMO EDITAR ESTE ARCHIVO                                     -->
+    <!-- 1. Busca los textos amarillos entre [corchetes]: son datos   -->
+    <!--    que debes reemplazar (nombre, correo, fecha, etc.).       -->
+    <!-- 2. Cada sección empieza con un comentario "EDITAR AQUÍ".     -->
+    <!-- 3. Para añadir un apartado, copia un bloque <h3> + <p>.      -->
+    <!-- 4. Este texto es una base general, no asesoría legal:        -->
+    <!--    revísalo según tu caso antes de publicarlo.               -->
+    <!-- ============================================================ -->
 
     <!-- Navegación -->
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
@@ -64,113 +92,256 @@
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0">
                     <a href="index.html" class="flex items-center gap-2">
-                        <img src="/assets/images/logo.svg" alt="CURRIS.SITE Logo" class="h-10 w-auto object-contain">
+                        <img src="assets/images/logo.svg" alt="CURRIS.SITE Logo" class="h-10 w-auto object-contain">
                     </a>
                 </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="index.html#servicios" class="hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Servicios</a>
-                        <a href="promos.html" class="hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Ofertas</a>
-                        <a href="index.html#contacto" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg shadow-brand-500/30">
-                            Contacto
-                        </a>
-                    </div>
-                </div>
-                <div class="md:hidden flex items-center">
-                    <a href="index.html" class="text-slate-300 hover:text-white text-sm font-medium">Volver al inicio</a>
+                <div class="flex items-center">
+                    <a href="index.html" class="bg-slate-800 border border-slate-700 hover:border-slate-600 hover:bg-slate-700 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all flex items-center gap-2">
+                        <i class="ph ph-arrow-left"></i> Volver al inicio
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Encabezado -->
-    <header class="relative pt-32 pb-16 overflow-hidden flex items-center justify-center">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-600/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-            <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-4">
-                Información <span class="gradient-text">Legal</span>
+    <header class="relative pt-32 pb-12 lg:pt-40 lg:pb-16 overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-brand-600/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-4 leading-tight">
+                Información <span class="gradient-text">legal</span>
             </h1>
-            <p class="text-slate-300 max-w-2xl mx-auto">
-                Términos de Uso, Política de Privacidad y Política de Alojamiento de CURRIS<sup class="text-xs">.SITE</sup>.
+            <p class="text-lg md:text-xl text-slate-300 font-light leading-relaxed">
+                Las reglas claras con las que trabajamos en CURRIS<sup class="text-xs ml-0.5">.SITE</sup>.
             </p>
+            <p class="mt-4 text-sm text-slate-500">Última actualización: <span class="editar">8 de noviembre de 2026</span></p>
         </div>
     </header>
 
-    <!-- Índice rápido -->
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div class="flex flex-wrap gap-3 justify-center">
-            <a href="#terminos" class="px-4 py-2 bg-slate-800/80 border border-slate-700 rounded-full text-sm hover:border-brand-500 transition-colors">Términos de Uso</a>
-            <a href="#privacidad" class="px-4 py-2 bg-slate-800/80 border border-slate-700 rounded-full text-sm hover:border-brand-500 transition-colors">Política de Privacidad</a>
-            <a href="#alojamiento-legal" class="px-4 py-2 bg-slate-800/80 border border-slate-700 rounded-full text-sm hover:border-brand-500 transition-colors">Política de Alojamiento</a>
+    <!-- Contenido -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+        <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
+
+            <!-- Índice (lateral en escritorio, chips en móvil) -->
+            <aside class="mb-10 lg:mb-0">
+                <div class="lg:sticky lg:top-28">
+                    <p class="text-sm font-bold text-brand-400 tracking-widest uppercase mb-4 hidden lg:block">Contenido</p>
+                    <nav class="flex lg:flex-col gap-3 overflow-x-auto pb-2 lg:pb-0">
+                        <a href="#terminos" class="flex-shrink-0 flex items-center gap-3 px-4 py-3 bg-slate-800/50 border border-slate-700 hover:border-brand-500/50 rounded-xl text-sm font-medium transition-colors whitespace-nowrap">
+                            <i class="ph ph-file-text text-brand-400 text-lg"></i> Términos de Uso
+                        </a>
+                        <a href="#privacidad" class="flex-shrink-0 flex items-center gap-3 px-4 py-3 bg-slate-800/50 border border-slate-700 hover:border-brand-500/50 rounded-xl text-sm font-medium transition-colors whitespace-nowrap">
+                            <i class="ph ph-shield-check text-brand-400 text-lg"></i> Política de Privacidad
+                        </a>
+                        <a href="#politica-alojamiento" class="flex-shrink-0 flex items-center gap-3 px-4 py-3 bg-slate-800/50 border border-slate-700 hover:border-brand-500/50 rounded-xl text-sm font-medium transition-colors whitespace-nowrap">
+                            <i class="ph ph-hard-drives text-brand-400 text-lg"></i> Política de Alojamiento
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+
+            <div class="space-y-10 min-w-0">
+                <div class="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-5 text-sm leading-relaxed text-amber-100">
+                    <strong class="block mb-1">Información pendiente antes de publicar</strong>
+                    Para que el aviso de privacidad y la información precontractual estén completos, CURRIS debe identificar al responsable legal (nombre completo o razón social) y publicar un domicilio y un medio de contacto adicional cuando la normativa de consumo lo exija. Estos datos no se han inventado y deben añadirse antes de aceptar contrataciones.
+                </div>
+
+                <!-- ============================================== -->
+                <!-- TÉRMINOS DE USO                                -->
+                <!-- ============================================== -->
+                <section id="terminos" class="bg-slate-800/50 border border-slate-700 rounded-3xl p-6 md:p-10">
+                    <div class="flex items-center gap-4 mb-2">
+                        <div class="h-14 w-14 bg-slate-900 rounded-2xl flex items-center justify-center border border-slate-700 flex-shrink-0">
+                            <i class="ph ph-file-text text-2xl text-brand-400"></i>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-bold">Términos de Uso</h2>
+                    </div>
+
+                    <div class="legal">
+                        <h3>1. Identidad y aceptación</h3>
+                        <p>CURRIS.SITE (en adelante, “CURRIS”) ofrece servicios de diseño, desarrollo y, cuando se acuerde expresamente, alojamiento de sitios web. La identidad de la persona física o moral que presta el servicio, así como su domicilio para efectos de contacto y notificaciones, deberá indicarse en la cotización, contrato o comprobante correspondiente. La marca CURRIS.SITE, por sí sola, no constituye una razón social.</p>
+                        <p>Al utilizar este sitio, solicitar una cotización o contratar un servicio, aceptas estos términos en lo que legalmente resulte aplicable. Antes de contratar, podrás revisar el alcance, precio, calendario, entregables y condiciones particulares de tu proyecto. Si existe un contrato o cotización aceptada que establezca condiciones específicas, estos documentos complementarán los presentes términos; en caso de contradicción prevalecerán las disposiciones obligatorias de la legislación aplicable y los acuerdos particulares válidamente celebrados.</p>
+
+                        <h3>2. Servicios y alcance del proyecto</h3>
+                        <p>CURRIS puede ofrecer desarrollo de sitios web básicos, avanzados y a medida. Las características, revisiones incluidas, funcionalidades, fechas estimadas, entregables y soporte se describirán en la cotización o acuerdo de cada proyecto. Cualquier función que no aparezca expresamente incluida se considerará fuera del alcance y podrá requerir una cotización adicional.</p>
+                        <p>Los plazos dependen de la entrega oportuna de materiales, accesos, aprobaciones y respuestas por parte del cliente, así como de la disponibilidad de proveedores externos. CURRIS comunicará los cambios relevantes que afecten el alcance o la fecha estimada.</p>
+
+                        <h3>3. Precios, cotizaciones e impuestos</h3>
+                        <ul>
+                            <li>Los precios publicados en el sitio son orientativos y pueden mostrarse en dólares estadounidenses (USD). La cotización confirmará el importe, moneda, método de pago y, cuando corresponda, conversión aplicable.</li>
+                            <li>Antes de iniciar, se informará el precio total y cualquier cargo adicional conocido, incluidos servicios de terceros que no estén incluidos.</li>
+                            <li>El anticipo, los pagos parciales y las fechas de pago serán los que aparezcan en la cotización aceptada. No se entenderá establecido un porcentaje de anticipo general si no se indica expresamente.</li>
+                            <li>Los impuestos que legalmente correspondan se tratarán conforme a la normativa fiscal mexicana y se desglosarán cuando resulte exigible.</li>
+                            <li>Los datos de pago se comunicarán por un canal privado. CURRIS no solicitará contraseñas, NIP ni códigos de autenticación bancaria.</li>
+                        </ul>
+
+                        <h3>4. Cancelaciones, cambios y reembolsos</h3>
+                        <p>El cliente puede solicitar la cancelación o modificación de un proyecto por correo electrónico. Si el trabajo ya comenzó, se revisará el avance y los gastos efectivamente comprometidos para determinar los importes que correspondan, sin eliminar los derechos irrenunciables que reconozca la legislación de protección al consumidor. Los trabajos no iniciados, pagos anticipados, entregables parciales y servicios de terceros se resolverán conforme a la cotización aceptada y a la ley aplicable.</p>
+                        <p>Los cambios que amplíen el alcance, agreguen funcionalidades o requieran trabajo adicional podrán modificar el precio y el calendario; deberán ser aprobados por el cliente antes de ejecutarse.</p>
+
+                        <h3>5. Dominios, alojamiento y servicios externos</h3>
+                        <p>Salvo que una cotización indique lo contrario, el precio de desarrollo no incluye la compra o renovación de dominios, hosting externo, correo empresarial, licencias, certificados, servicios de pago ni tarifas de plataformas de terceros. La disponibilidad y condiciones del alojamiento opcional bajo curris.site se describen en la <a href="#politica-alojamiento">Política de Alojamiento</a>.</p>
+
+                        <h3>6. Obligaciones del cliente</h3>
+                        <ul>
+                            <li>Entregar información, textos, imágenes, marcas y demás materiales veraces y sobre los que tenga derechos suficientes para autorizar su uso.</li>
+                            <li>Contar con autorización para proporcionar datos personales de terceros que incluya en el proyecto.</li>
+                            <li>Revisar y aprobar los entregables, y facilitar oportunamente los accesos y materiales necesarios.</li>
+                            <li>No utilizar el sitio o los servicios para actividades ilícitas, fraude, suplantación, distribución de malware, infracción de derechos o afectación a terceros.</li>
+                            <li>Mantener bajo resguardo sus contraseñas, claves API y accesos; no enviarlos por formularios públicos.</li>
+                        </ul>
+
+                        <h3>7. Propiedad intelectual y licencias</h3>
+                        <p>Los derechos sobre materiales aportados por el cliente permanecen con sus respectivos titulares. Los componentes, librerías, tipografías, imágenes y herramientas de terceros se rigen por sus propias licencias. Salvo pacto escrito distinto, una vez cubierto el precio total, CURRIS entregará al cliente los derechos de uso y los archivos o código específicamente incluidos en la cotización, en los términos acordados y respetando los derechos de terceros.</p>
+                        <p>Los elementos, plantillas, componentes reutilizables, herramientas y conocimientos preexistentes de CURRIS no se transfieren por el solo hecho de incorporarse a un proyecto; se concede únicamente la licencia necesaria para utilizar el entregable conforme a su finalidad. CURRIS podrá mostrar el proyecto en su portafolio únicamente cuando sea público o el cliente haya autorizado esa exhibición. Se respetarán en todo momento la Ley Federal del Derecho de Autor y demás disposiciones aplicables.</p>
+
+                        <h3>8. Disponibilidad, garantías y responsabilidad</h3>
+                        <p>CURRIS realizará el trabajo con diligencia y conforme al alcance acordado. No garantiza resultados comerciales concretos, número de visitas, ventas, posicionamiento ni disponibilidad ininterrumpida de servicios externos. Las interrupciones atribuibles a proveedores de hosting, dominios, plataformas, redes o servicios de terceros se atenderán dentro de las posibilidades de CURRIS.</p>
+                        <p>Nada de lo previsto en estos términos excluye o limita responsabilidades, garantías o derechos que no puedan excluirse conforme a la legislación mexicana, especialmente los derechos que correspondan a consumidores.</p>
+
+                        <h3>9. Uso del sitio y comunicaciones electrónicas</h3>
+                        <p>El usuario se compromete a no interferir con la seguridad, disponibilidad o funcionamiento del sitio. Las solicitudes, cotizaciones y aprobaciones enviadas por medios electrónicos podrán conservarse como constancia de las comunicaciones y acuerdos, de conformidad con las disposiciones aplicables sobre mensajes de datos y contratación electrónica.</p>
+
+                        <h3>10. Legislación aplicable y solución de controversias</h3>
+                        <p>Estos términos se interpretarán conforme a las leyes federales de los Estados Unidos Mexicanos y, en lo que corresponda, las leyes civiles aplicables del lugar de celebración o cumplimiento. Entre otras disposiciones, podrán resultar aplicables la Ley Federal de Protección al Consumidor, el Código de Comercio, el Código Civil Federal, la legislación civil local y la Ley Federal del Derecho de Autor. La aplicación concreta dependerá de la naturaleza de la relación y del servicio contratado.</p>
+                        <p>Cuando exista una relación de consumo, ninguna disposición de estos términos pretende privar al consumidor de los derechos ni de los mecanismos de reclamación que le reconoce la ley, incluida la posibilidad de acudir a PROFECO cuando corresponda.</p>
+
+                        <h3>11. Cambios y contacto</h3>
+                        <p>CURRIS podrá actualizar estos términos para reflejar cambios legales, técnicos o comerciales. La versión vigente se publicará en esta página con su fecha de actualización. Para consultas, aclaraciones o reclamaciones, escribe a <a href="mailto:contact@curris.site">contact@curris.site</a>.</p>
+                    </div>
+                </section>
+
+                <!-- ============================================== -->
+                <!-- POLÍTICA DE PRIVACIDAD                         -->
+                <!-- ============================================== -->
+                <section id="privacidad" class="bg-slate-800/50 border border-slate-700 rounded-3xl p-6 md:p-10">
+                    <div class="flex items-center gap-4 mb-2">
+                        <div class="h-14 w-14 bg-slate-900 rounded-2xl flex items-center justify-center border border-slate-700 flex-shrink-0">
+                            <i class="ph ph-shield-check text-2xl text-brand-400"></i>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-bold">Política de Privacidad</h2>
+                    </div>
+
+                    <div class="legal">
+                        <h3>1. Responsable del tratamiento</h3>
+                        <p>El responsable del tratamiento de los datos personales recabados a través de CURRIS.SITE es la persona física o moral que opera el servicio bajo la marca CURRIS.SITE. Para cumplir adecuadamente con el aviso de privacidad, antes de publicar esta versión debe completarse la identidad legal del responsable y su domicilio: <strong class="text-white">[NOMBRE COMPLETO O RAZÓN SOCIAL Y DOMICILIO DEL RESPONSABLE]</strong>. Para solicitudes relacionadas con privacidad puedes escribir a <a href="mailto:contact@curris.site">contact@curris.site</a>.</p>
+
+                        <h3>2. Datos personales que podemos tratar</h3>
+                        <p>Dependiendo de la interacción, podemos tratar las siguientes categorías de datos:</p>
+                        <ul>
+                            <li>Datos de identificación y contacto: nombre, nombre comercial y correo electrónico.</li>
+                            <li>Datos del proyecto: tipo de sitio, presupuesto aproximado, alojamiento solicitado, descripción, funcionalidades y comunicaciones relacionadas.</li>
+                            <li>Datos técnicos: fecha y hora de la solicitud, estado del trámite, información básica del navegador o dispositivo y registros técnicos necesarios para seguridad y funcionamiento.</li>
+                            <li>Mensajes enviados al asistente virtual VorteX, cuando se utilice.</li>
+                        </ul>
+                        <p>CURRIS no solicita intencionalmente datos personales sensibles para cotizar o desarrollar sitios web. No envíes información sensible, contraseñas, datos bancarios completos ni información de terceros que no sea necesaria. Si un proyecto requiere tratar datos adicionales, se informará previamente y se determinará la base legal correspondiente.</p>
+
+                        <h3>3. Finalidades del tratamiento</h3>
+                        <p>Los datos podrán utilizarse para finalidades necesarias para la relación con el usuario:</p>
+                        <ul>
+                            <li>Recibir, analizar y responder solicitudes de cotización.</li>
+                            <li>Preparar propuestas, prestar los servicios contratados y dar seguimiento a los proyectos.</li>
+                            <li>Atender dudas, aclaraciones, soporte, reclamaciones y solicitudes de privacidad.</li>
+                            <li>Proteger el sitio, prevenir usos abusivos y mantener registros técnicos de seguridad.</li>
+                            <li>Cumplir obligaciones legales y conservar constancias cuando sea necesario.</li>
+                        </ul>
+                        <p>Si en el futuro se utilizan datos para finalidades secundarias, como publicidad o comunicaciones promocionales, se informará de forma separada y se habilitarán los medios legales para oponerse cuando corresponda. No vendemos datos personales.</p>
+
+                        <h3>4. Herramientas y proveedores tecnológicos</h3>
+                        <p>El sitio puede utilizar servicios de Google Firebase (por ejemplo, Firestore y mecanismos de autenticación) para recibir y almacenar solicitudes, y Google Gemini para procesar los mensajes enviados a VorteX. Estos proveedores pueden tratar información desde infraestructura ubicada fuera de México, conforme a sus condiciones y políticas. Los datos se compartirán únicamente en la medida necesaria para operar las funciones solicitadas, cumplir la ley o atender requerimientos de autoridad competente.</p>
+                        <p>El uso de servicios de terceros también está sujeto a sus propios términos y avisos de privacidad. CURRIS no controla de forma independiente las prácticas de privacidad de dichos proveedores.</p>
+
+                        <h3>5. Conservación y seguridad</h3>
+                        <p>Conservaremos los datos durante el tiempo necesario para atender la solicitud, prestar el servicio, gestionar posibles aclaraciones y cumplir obligaciones legales. Después podrán eliminarse, bloquearse o anonimizarse según corresponda. El plazo concreto dependerá del tipo de registro y de las obligaciones aplicables.</p>
+                        <p>Se adoptan medidas administrativas, técnicas y físicas razonables para proteger la información. Ningún sistema de transmisión o almacenamiento puede garantizar seguridad absoluta; por ello, evita enviar secretos o información financiera sensible mediante formularios o chats.</p>
+
+                        <h3>6. Derechos ARCO y revocación del consentimiento</h3>
+                        <p>Conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares, puedes solicitar el acceso a tus datos personales, su rectificación, cancelación u oposición a su tratamiento (derechos ARCO), así como revocar el consentimiento cuando legalmente proceda o solicitar la limitación del uso o divulgación.</p>
+                        <p>Envía tu solicitud a <a href="mailto:contact@curris.site">contact@curris.site</a> con el asunto “Solicitud de privacidad”. Incluye tu nombre, un medio para comunicarte contigo, una descripción clara del derecho que deseas ejercer y la información que permita localizar los datos. Si actúas mediante representante, podrá solicitarse documentación para acreditar la representación. Se responderá dentro de los plazos y conforme al procedimiento previsto en la ley; podrán requerirse datos adicionales para verificar identidad o precisar la solicitud.</p>
+
+                        <h3>7. Cookies, almacenamiento local y tecnologías similares</h3>
+                        <p>El sitio y sus proveedores pueden utilizar cookies, almacenamiento local, identificadores o tecnologías similares estrictamente necesarias para funciones técnicas, seguridad, preferencias o funcionamiento de servicios integrados. La disponibilidad y finalidad concreta pueden variar según las funciones activas. Puedes administrar cookies desde la configuración de tu navegador; bloquearlas podría afectar algunas funciones. Si se incorporan herramientas de analítica o publicidad no esenciales, esta política deberá actualizarse para describirlas y, cuando corresponda, solicitar el consentimiento aplicable.</p>
+
+                        <h3>8. Datos de menores de edad</h3>
+                        <p>Los servicios están dirigidos a personas que puedan contratar legalmente. Si una persona menor de edad desea solicitar un servicio o proporcionar datos para una contratación, deberá intervenir su madre, padre o tutor legal cuando así lo exija la legislación aplicable. No buscamos recopilar deliberadamente datos de menores para finalidades distintas de las necesarias para atender una consulta autorizada.</p>
+
+                        <h3>9. Cambios al aviso de privacidad</h3>
+                        <p>Este aviso puede actualizarse por cambios legales, técnicos o en las prácticas de tratamiento. Las modificaciones se publicarán en esta página e indicarán la fecha de actualización. Si el cambio afecta de manera relevante las finalidades o condiciones del tratamiento, se comunicará por los medios que correspondan conforme a la ley.</p>
+
+                        <h3>10. Legislación aplicable</h3>
+                        <p>Este aviso se rige principalmente por la Ley Federal de Protección de Datos Personales en Posesión de los Particulares y sus disposiciones reglamentarias o administrativas aplicables, además de las demás normas mexicanas que correspondan. La autoridad competente y los procedimientos disponibles serán los establecidos por la legislación vigente.</p>
+                    </div>
+                </section>
+
+                <!-- ============================================== -->
+                <!-- POLÍTICA DE ALOJAMIENTO                        -->
+                <!-- ============================================== -->
+                <section id="politica-alojamiento" class="bg-slate-800/50 border border-slate-700 rounded-3xl p-6 md:p-10">
+                    <div class="flex items-center gap-4 mb-2">
+                        <div class="h-14 w-14 bg-slate-900 rounded-2xl flex items-center justify-center border border-slate-700 flex-shrink-0">
+                            <i class="ph ph-hard-drives text-2xl text-brand-400"></i>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-bold">Política de Alojamiento</h2>
+                    </div>
+
+                    <div class="legal">
+                        <h3>1. Objeto y modalidad</h3>
+                        <p>CURRIS puede ofrecer, cuando se acuerde expresamente, alojamiento de proyectos web estáticos dentro del dominio curris.site, mediante una dirección similar a <strong class="text-white">curris.site/Tu-Proyecto/</strong>. Este alojamiento es un servicio opcional y sujeto a disponibilidad; no se considera incluido en el desarrollo salvo que la cotización lo indique.</p>
+
+                        <h3>2. Alcance técnico y límites</h3>
+                        <ul>
+                            <li>Está pensado principalmente para archivos estáticos HTML, CSS, JavaScript, imágenes y recursos equivalentes.</li>
+                            <li>No incluye por sí mismo servidores de aplicaciones, bases de datos, autenticación, procesamiento de pagos ni ejecución de código del lado del servidor.</li>
+                            <li>Las integraciones dinámicas deberán utilizar servicios externos y sus respectivos términos, límites, costos y políticas de privacidad.</li>
+                            <li>Los límites de almacenamiento, transferencia, tamaño de archivos y uso se comunicarán en la propuesta o acuerdo del proyecto. No se promete capacidad ilimitada.</li>
+                        </ul>
+
+                        <h3>3. Obligaciones del titular del proyecto</h3>
+                        <p>El cliente debe mantener una copia actualizada de sus archivos y asegurarse de que el contenido publicado sea lícito, veraz y cuente con los permisos necesarios. También debe proteger sus credenciales y avisar oportunamente de cualquier acceso no autorizado o vulnerabilidad que detecte.</p>
+
+                        <h3>4. Usos no permitidos</h3>
+                        <p>No se permite alojar contenido o ejecutar actividades que infrinjan leyes, derechos de terceros o estas condiciones, incluyendo fraude, phishing, malware, suplantación de identidad, distribución no autorizada de obras, spam, minería no autorizada de recursos o cualquier actividad que comprometa la seguridad, estabilidad o reputación de la infraestructura.</p>
+
+                        <h3>5. Disponibilidad, mantenimiento y respaldos</h3>
+                        <p>El alojamiento puede experimentar interrupciones por mantenimiento, incidentes técnicos, límites del proveedor o causas fuera del control de CURRIS. Salvo acuerdo escrito distinto, no se ofrece un nivel de servicio (SLA), disponibilidad garantizada ni respaldo automático. El cliente es responsable de conservar copias independientes de su proyecto.</p>
+
+                        <h3>6. Suspensión, retiro y terminación</h3>
+                        <p>CURRIS podrá restringir temporalmente o retirar un proyecto cuando exista un riesgo de seguridad, una infracción legal, incumplimiento de estas condiciones, requerimiento de autoridad o necesidad técnica justificada. Cuando las circunstancias lo permitan, se notificará al cliente y se le dará oportunidad razonable para corregir el incumplimiento o recuperar sus archivos. En situaciones urgentes para proteger a usuarios o infraestructura, la suspensión podrá ser inmediata.</p>
+                        <p>El cliente puede solicitar la terminación del alojamiento y la entrega de los archivos que formen parte del servicio contratado. La migración a otro proveedor puede requerir tareas adicionales que se cotizarán por separado si no están incluidas.</p>
+
+                        <h3>7. Servicios de terceros y responsabilidad</h3>
+                        <p>El alojamiento puede depender de plataformas e infraestructura de terceros. Sus fallas, cambios de condiciones, límites o suspensiones pueden afectar el servicio. CURRIS procurará comunicar incidentes relevantes y apoyar en la medida razonable, pero no puede garantizar el funcionamiento de sistemas ajenos a su control. Esta disposición no limita derechos o responsabilidades que legalmente no puedan excluirse.</p>
+
+                        <h3>8. Datos personales y contenido publicado</h3>
+                        <p>El cliente es responsable de contar con una base legal y avisos adecuados si su sitio recopila datos personales de sus propios visitantes. CURRIS tratará los datos que reciba directamente conforme a su <a href="#privacidad">Política de Privacidad</a>. Si CURRIS llegara a tratar datos personales por cuenta del cliente, las partes deberán acordar previamente las instrucciones, medidas de seguridad y responsabilidades aplicables.</p>
+
+                        <h3>9. Cambios a esta política y contacto</h3>
+                        <p>Esta política podrá actualizarse para reflejar cambios operativos, técnicos o legales. La versión vigente estará disponible en esta página. Para soporte, solicitudes de retiro o reportes de abuso, escribe a <a href="mailto:contact@curris.site">contact@curris.site</a>.</p>
+                    </div>
+                </section>
+
+            </div>
         </div>
-    </div>
-
-    <!-- Contenido legal -->
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 legal-content space-y-20">
-
-        <!-- Términos de Uso -->
-        <section id="terminos" class="scroll-mt-28">
-            <h2 class="text-sm font-bold text-brand-400 tracking-widest uppercase mb-4">01</h2>
-            <h3 class="text-2xl md:text-3xl font-bold text-white mb-6">Términos de Uso</h3>
-            <div class="space-y-4 text-sm leading-relaxed">
-                <p>Al acceder y utilizar los servicios de CURRIS<sup>.SITE</sup> aceptas los presentes Términos de Uso. Si no estás de acuerdo con alguno de los puntos aquí descritos, te pedimos no utilizar nuestros servicios.</p>
-                <h4 class="font-bold text-white mt-4">Servicios ofrecidos</h4>
-                <p>CURRIS<sup>.SITE</sup> ofrece desarrollo de sitios web básicos, avanzados y a medida, así como opciones de alojamiento bajo las condiciones descritas en la sección correspondiente del sitio principal.</p>
-                <h4 class="font-bold text-white mt-4">Cotizaciones y pagos</h4>
-                <p>Los precios mostrados son estimaciones base. El costo final de cada proyecto se define tras evaluar los requerimientos específicos del cliente. Los métodos de pago y datos de cobro se comparten de forma privada una vez confirmado el desarrollo.</p>
-                <h4 class="font-bold text-white mt-4">Responsabilidades del cliente</h4>
-                <p>El cliente es responsable de proporcionar información veraz, contenido e imágenes con los derechos correspondientes, y de cumplir con los acuerdos de pago establecidos para la entrega del proyecto.</p>
-                <h4 class="font-bold text-white mt-4">Limitación de responsabilidad</h4>
-                <p>CURRIS<sup>.SITE</sup> no se hace responsable por interrupciones del servicio derivadas de terceros (proveedores de hosting, dominios, pasarelas de pago u otros servicios externos integrados al proyecto).</p>
-                <h4 class="font-bold text-white mt-4">Modificaciones</h4>
-                <p>Estos términos pueden actualizarse en cualquier momento. Te recomendamos revisarlos periódicamente.</p>
-            </div>
-        </section>
-
-        <!-- Política de Privacidad -->
-        <section id="privacidad" class="scroll-mt-28">
-            <h2 class="text-sm font-bold text-brand-400 tracking-widest uppercase mb-4">02</h2>
-            <h3 class="text-2xl md:text-3xl font-bold text-white mb-6">Política de Privacidad</h3>
-            <div class="space-y-4 text-sm leading-relaxed">
-                <p>En CURRIS<sup>.SITE</sup> nos tomamos en serio la privacidad de quienes nos contactan. Esta política describe qué información recopilamos y cómo la utilizamos.</p>
-                <h4 class="font-bold text-white mt-4">Información que recopilamos</h4>
-                <p>A través de nuestro formulario de solicitud de presupuesto recopilamos: nombre o empresa, correo electrónico, tipo de sitio web solicitado, presupuesto aproximado, modalidad de alojamiento preferida, descripción del proyecto y funcionalidades deseadas.</p>
-                <h4 class="font-bold text-white mt-4">Uso de la información</h4>
-                <p>Los datos recopilados se utilizan exclusivamente para evaluar tu solicitud, elaborar una cotización y ponernos en contacto contigo respecto a tu proyecto. No vendemos ni compartimos tu información con terceros ajenos al desarrollo del proyecto solicitado.</p>
-                <h4 class="font-bold text-white mt-4">Almacenamiento</h4>
-                <p>La información enviada a través del formulario se almacena de forma segura utilizando servicios de infraestructura de Google Firebase.</p>
-                <h4 class="font-bold text-white mt-4">Tus derechos</h4>
-                <p>Puedes solicitar la eliminación o corrección de tus datos personales en cualquier momento escribiéndonos a <a href="mailto:contacto@curris.site" class="text-brand-400 hover:text-brand-300">contacto@curris.site</a>.</p>
-            </div>
-        </section>
-
-        <!-- Política de Alojamiento -->
-        <section id="alojamiento-legal" class="scroll-mt-28">
-            <h2 class="text-sm font-bold text-brand-400 tracking-widest uppercase mb-4">03</h2>
-            <h3 class="text-2xl md:text-3xl font-bold text-white mb-6">Política de Alojamiento</h3>
-            <div class="space-y-4 text-sm leading-relaxed">
-                <p>CURRIS<sup>.SITE</sup> ofrece, de manera opcional y sujeta a disponibilidad, alojamiento gratuito para proyectos estáticos sencillos dentro de nuestro dominio principal (<span class="font-mono text-brand-300">curris.site/tu-proyecto/</span>).</p>
-                <h4 class="font-bold text-white mt-4">Condiciones</h4>
-                <ul class="list-disc list-inside space-y-2">
-                    <li>El alojamiento gratuito está pensado únicamente para sitios estáticos (HTML, CSS, JS sin backend propio).</li>
-                    <li>Las funcionalidades dinámicas (bases de datos, autenticación, pagos, etc.) requieren servicios externos conectados por el cliente.</li>
-                    <li>No se garantiza disponibilidad ilimitada ni permanente del alojamiento gratuito.</li>
-                    <li>CURRIS<sup>.SITE</sup> se reserva el derecho de retirar un proyecto del alojamiento gratuito en caso de uso indebido, contenido ilegal o incumplimiento de estos términos.</li>
-                </ul>
-                <h4 class="font-bold text-white mt-4">Dominio propio</h4>
-                <p>Si el cliente cuenta con su propio dominio y hosting, CURRIS<sup>.SITE</sup> entrega el código fuente del proyecto o lo conecta a la infraestructura compatible proporcionada por el cliente.</p>
-            </div>
-        </section>
-
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-950 border-t border-slate-900 py-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p class="text-slate-500 text-sm">
-                &copy; <span id="year"></span> CURRIS<sup class="text-[10px]">.SITE</sup>. Todos los derechos reservados.
-            </p>
-            <a href="index.html" class="inline-block mt-4 text-brand-400 hover:text-brand-300 text-sm">&larr; Volver al inicio</a>
+    <footer class="bg-slate-950 border-t border-slate-900 pt-12 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+                <a href="index.html" class="text-2xl font-black tracking-tight text-white flex items-start">
+                    CURRIS<sup class="text-[0.45em] mt-2 ml-0.5 text-brand-400 font-bold tracking-widest uppercase">.SITE</sup>
+                </a>
+                <ul class="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
+                    <li><a href="#terminos" class="hover:text-brand-400 transition-colors">Términos de Uso</a></li>
+                    <li><a href="#privacidad" class="hover:text-brand-400 transition-colors">Política de Privacidad</a></li>
+                    <li><a href="#politica-alojamiento" class="hover:text-brand-400 transition-colors">Política de Alojamiento</a></li>
+                </ul>
+            </div>
+            <div class="mt-8 pt-8 border-t border-slate-900 text-center">
+                <p class="text-slate-500 text-sm mb-2">Marco de referencia: legislación mexicana federal aplicable, incluida la normativa de protección al consumidor, datos personales, contratación electrónica y derechos de autor.</p>\n                <p class="text-slate-500 text-sm">
+                    &copy; <span id="year"></span> CURRIS<sup class="text-[10px]">.SITE</sup>. Todos los derechos reservados.
+                </p>
+            </div>
         </div>
     </footer>
 
