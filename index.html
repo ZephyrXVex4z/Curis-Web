@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CURRIS·ˢⁱᵗᵉ — Sitio en construcción</title>
+    <meta name="description" content="Estamos construyendo algo nuevo en CURRIS.SITE. Vuelve pronto.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f172a' stroke='%234f46e5' stroke-width='4'/%3E%3Ctext x='50' y='68' font-family='sans-serif' font-size='60' font-weight='900' fill='%23ffffff' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        * { box-sizing: border-box; }
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 24px;
+            text-align: center;
+        }
+        .glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 800px;
+            max-width: 160vw;
+            max-height: 160vw;
+            transform: translate(-50%, -50%);
+            background: rgba(79, 70, 229, 0.25);
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            max-width: 560px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 999px;
+            background: rgba(79, 70, 229, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            color: #a5b4fc;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #818cf8;
+            animation: pulse 1.6s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+        h1 {
+            font-size: clamp(2.2rem, 6vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin: 0 0 20px;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p.lead {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            font-weight: 300;
+            line-height: 1.6;
+            margin: 0 0 36px;
+        }
+        .brand {
+            font-weight: 900;
+            color: #fff;
+        }
+        .brand sup {
+            font-size: 0.5em;
+            color: #818cf8;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 999px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .btn-primary {
+            background: #4f46e5;
+            color: #fff;
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+        }
+        .btn-primary:hover {
+            background: #6366f1;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: rgba(30, 41, 59, 0.8);
+            color: #f8fafc;
+            border: 1px solid #334155;
+        }
+        .btn-secondary:hover {
+            border-color: #475569;
+            background: rgba(51, 65, 85, 0.8);
+            transform: translateY(-2px);
+        }
+        footer {
+            position: relative;
+            z-index: 1;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="glow"></div>
+
+    <div class="wrapper">
+        <div class="content">
+            <span class="badge"><span class="dot"></span> Sitio en construcción</span>
+
+            <h1>Estamos construyendo <br class="hidden-mobile"> algo <span class="gradient-text">nuevo</span>.</h1>
+
+            <p class="lead">
+                <span class="brand">CURRIS<sup>.SITE</sup></span> está trabajando en una experiencia renovada.
+                Vuelve pronto para verla en línea.
+            </p>
+
+            <div class="actions">
+                <a href="mailto:contacto@curris.site" class="btn btn-primary">Contáctanos</a>
+                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">WhatsApp</a>
+            </div>
+        </div>
+
+        <footer>
+            &copy; <span id="year"></span> CURRIS<span style="color:#818cf8; font-weight:700;">.SITE</span>. Todos los derechos reservados.
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
